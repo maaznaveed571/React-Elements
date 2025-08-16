@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+
+@theme inline{
+  --color-mint: oklch(0.72 0.11 178);
+}
