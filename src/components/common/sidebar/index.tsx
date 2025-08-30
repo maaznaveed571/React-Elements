@@ -49,13 +49,13 @@ const navigationItems: NavItem[] = [
 const Sidebar = () => {
     const location = useLocation()
     return (
-        <div className="h-screen px-[1rem] flex items-center">
-            <div className='bg-linear-to-r from-cyan-300 to-blue-600 h-[98dvh] w-fit flex flex-col items-center p-2 py-[2rem] text-white rounded-full'>
-                <div className='mb-8'>
+        <div className="h-[100dvh] !px-[1rem] !flex !items-center">
+            <div className='bg-linear-to-r from-cyan-300 to-blue-600 h-[98dvh] w-fit flex flex-col items-center !p-2 !py-[2rem] text-white rounded-full'>
+                <div className='!mb-8'>
                     <img src="/vite.svg" alt="" />
                 </div>
                 <nav>
-                    <ul className='space-y-2'>
+                    <ul className='!space-y-2'>
                         {navigationItems.map((item) => (
                             <li key={item.id}>
                                 <a

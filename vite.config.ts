@@ -11,4 +11,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server:{
+    allowedHosts:['project-nova-file-store.oss-me-central-1.aliyuncs.com']
+  }
+  
 })
