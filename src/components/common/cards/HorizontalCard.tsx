@@ -1,5 +1,5 @@
-import React from 'react';
-import { cn } from '../../../lib/utils';
+import React from "react";
+import { cn } from "../../../lib/utils";
 
 interface HorizontalCardProps {
   className?: string;
@@ -12,7 +12,7 @@ interface HorizontalCardProps {
   description?: string;
   badge?: {
     text: string;
-    variant?: 'default' | 'secondary' | 'success' | 'warning' | 'danger';
+    variant?: "default" | "secondary" | "success" | "warning" | "danger";
   };
   footer?: React.ReactNode;
   onClick?: () => void;
@@ -27,22 +27,22 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({
   badge,
   footer,
   onClick,
-  children
+  children,
 }) => {
   const badgeVariants = {
-    default: 'bg-gray-100 text-gray-800',
-    secondary: 'bg-blue-100 text-blue-800',
-    success: 'bg-green-100 text-green-800',
-    warning: 'bg-yellow-100 text-yellow-800',
-    danger: 'bg-red-100 text-red-800'
+    default: "bg-gray-100 text-gray-800",
+    secondary: "bg-blue-100 text-blue-800",
+    success: "bg-green-100 text-green-800",
+    warning: "bg-yellow-100 text-yellow-800",
+    danger: "bg-red-100 text-red-800",
   };
 
   return (
     <div
       className={cn(
-        'flex bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-200',
-        onClick && 'cursor-pointer hover:bg-gray-50',
-        className
+        "flex bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-200",
+        onClick && "cursor-pointer hover:bg-gray-50",
+        className,
       )}
       onClick={onClick}
     >
@@ -52,10 +52,7 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({
           <img
             src={image.src}
             alt={image.alt}
-            className={cn(
-              'w-full h-full object-cover',
-              image.className
-            )}
+            className={cn("w-full h-full object-cover", image.className)}
           />
         </div>
       )}
@@ -67,8 +64,8 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({
           {badge && (
             <span
               className={cn(
-                'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mb-2',
-                badgeVariants[badge.variant || 'default']
+                "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mb-2",
+                badgeVariants[badge.variant || "default"],
               )}
             >
               {badge.text}
@@ -95,9 +92,7 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({
 
         {/* Footer */}
         {footer && (
-          <div className="mt-4 pt-3 border-t border-gray-100">
-            {footer}
-          </div>
+          <div className="mt-4 pt-3 border-t border-gray-100">{footer}</div>
         )}
       </div>
     </div>
@@ -114,14 +109,12 @@ export const HorizontalCardExample: React.FC = () => {
       <HorizontalCard
         image={{
           src: "https://live.staticflickr.com/65535/52887944872_a7aeb48ba1_h.jpg",
-          alt: "Beautiful landscape"
+          alt: "Beautiful landscape",
         }}
         title="Beautiful Mountain Landscape"
         description="Discover the breathtaking views of mountain ranges with crystal clear lakes and pristine wilderness."
         badge={{ text: "Featured", variant: "success" }}
       />
-
-      
     </div>
   );
 };
