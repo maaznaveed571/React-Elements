@@ -76,7 +76,9 @@ const questions = [
 ];
 
 export default function AssessmentPlayer() {
-  const [blobs, setBlobs] = useState<(string | null)[]>(Array(questions.length).fill(null));
+  const [blobs, setBlobs] = useState<(string | null)[]>(
+    Array(questions.length).fill(null),
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Preload a specific video
@@ -84,7 +86,7 @@ export default function AssessmentPlayer() {
     if (i < questions.length && !blobs[i]) {
       const res = await fetch(questions[i].video);
       const blob = await res.blob();
-      setBlobs(prev => {
+      setBlobs((prev) => {
         const copy = [...prev];
         copy[i] = URL.createObjectURL(blob);
         return copy;
