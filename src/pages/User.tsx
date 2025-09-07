@@ -1,10 +1,7 @@
 import UserCrud from "../components/features/users";
 
-
 const User = () => {
-  return (
-    <UserCrud />
-  )
-}
+  return <UserCrud />;
+};
 
-export default User
+export default User;
