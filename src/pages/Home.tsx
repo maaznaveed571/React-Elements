@@ -1,9 +1,7 @@
 // Swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
+import "swiper/css";
 
 //  librarry
 import resume from "/CV.pdf";
@@ -20,29 +18,28 @@ import Services6 from "/assests/service_icon/005-line-chart.svg";
 import Logo from "/assests/default-removebg-preview.png";
 import Profile from "/assests/profile.png";
 import "./Home.css";
-import { isValidArray } from '../utils/global-functions';
-import { cn } from '../lib/utils';
+import { isValidArray } from "../utils/global-functions";
+import { cn } from "../lib/utils";
 const skills: {
   src: string;
-  alt: string,
-  class?: string
+  alt: string;
+  class?: string;
 }[] = [
-    { src: "./skills/html.svg", alt: "html" },
-    { src: "./skills/css.svg", alt: "css" },
-    { src: "./skills/tailwind.svg", alt: "tailwind" },
-    { src: "./skills/bootstrap.png", alt: "bootstrap" },
-    { src: "./skills/js.svg", alt: "JavaScript" },
-    { src: "./skills/react.svg", alt: "React" },
-    { src: "./skills/vite.svg", alt: "Vite" },
-    { src: "./skills/nextjs.svg", alt: "Next.js" },
-    { src: "./skills/angular.svg", alt: "Angular" },
-    { src: "./skills/typescript.svg", alt: "TypeScript" },
-    { src: "./skills/nest.svg", alt: "nest" },
-    { src: "./skills/shopify.svg", alt: "Shopify" },
-    { src: "./skills/swiper.svg", alt: "Swiper" },
-    { src: "./skills/supabase.svg", alt: "supabase" },
-  ]
-
+  { src: "./skills/html.svg", alt: "html" },
+  { src: "./skills/css.svg", alt: "css" },
+  { src: "./skills/tailwind.svg", alt: "tailwind" },
+  { src: "./skills/bootstrap.png", alt: "bootstrap" },
+  { src: "./skills/js.svg", alt: "JavaScript" },
+  { src: "./skills/react.svg", alt: "React" },
+  { src: "./skills/vite.svg", alt: "Vite" },
+  { src: "./skills/nextjs.svg", alt: "Next.js" },
+  { src: "./skills/angular.svg", alt: "Angular" },
+  { src: "./skills/typescript.svg", alt: "TypeScript" },
+  { src: "./skills/nest.svg", alt: "nest" },
+  { src: "./skills/shopify.svg", alt: "Shopify" },
+  { src: "./skills/swiper.svg", alt: "Swiper" },
+  { src: "./skills/supabase.svg", alt: "supabase" },
+];
 
 const Home = () => {
   return (
@@ -50,24 +47,31 @@ const Home = () => {
       <div className="main_container">
         <div className="about">
           <div className="about_row">
-            <div
-              className="image"
-            >
+            <div className="image">
               <img src={Profile} alt="" />
             </div>
-            <div
-              className="content"
-            >
+            <div className="content">
               <h1>We can make it together</h1>
               <p>
-                I am a passionate <span>Full Stack Developer</span> with hands-on experience working in diverse companies, where I have contributed to building and scaling web applications from front-end to back-end. I hold a Bachelor’s degree in Software Engineering, which has provided me with a solid foundation in software development and problem-solving. Over the years, I have mastered modern technologies, frameworks, and tools to deliver high-quality, efficient, and user-friendly solutions.
+                I am a passionate <span>Full Stack Developer</span> with
+                hands-on experience working in diverse companies, where I have
+                contributed to building and scaling web applications from
+                front-end to back-end. I hold a Bachelor’s degree in Software
+                Engineering, which has provided me with a solid foundation in
+                software development and problem-solving. Over the years, I have
+                mastered modern technologies, frameworks, and tools to deliver
+                high-quality, efficient, and user-friendly solutions.
               </p>
               <p>
-                I am always eager to take on new challenges, collaborate with teams, and contribute to impactful projects. If you’re looking for someone reliable, skilled, and dedicated to driving success through technology, <strong>let’s connect—I am ready to get started!</strong>
+                I am always eager to take on new challenges, collaborate with
+                teams, and contribute to impactful projects. If you’re looking
+                for someone reliable, skilled, and dedicated to driving success
+                through technology,{" "}
+                <strong>let’s connect—I am ready to get started!</strong>
               </p>
 
               <div className="download_button flex gap-2">
-                <a href={'#tel:03363017225'}>
+                <a href={"#tel:03363017225"}>
                   <button>Call Now</button>
                 </a>
                 <a href={resume} download="CV">
@@ -86,15 +90,19 @@ const Home = () => {
           modules={[FreeMode]}
           className="!ml-0 !pl-[2rem] !mt-[1rem]"
         >
-          {isValidArray(skills) && skills.map((item) => (
-            <SwiperSlide key={item?.alt} className={cn("max-w-[50px]", item?.class)}>
-              <img
-                className="w-full h-full object-contain"
-                src={item?.src}
-                alt={item?.alt}
-              />
-            </SwiperSlide>
-          ))}
+          {isValidArray(skills) &&
+            skills.map((item) => (
+              <SwiperSlide
+                key={item?.alt}
+                className={cn("max-w-[50px]", item?.class)}
+              >
+                <img
+                  className="w-full h-full object-contain"
+                  src={item?.src}
+                  alt={item?.alt}
+                />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
 
