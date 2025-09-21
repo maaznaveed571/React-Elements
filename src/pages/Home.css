@@ -801,8 +801,8 @@ h1 {
 }
 
 .about .about_row .image {
-  width: 800px;
   position: relative;
+  flex: 1;
 }
 
 .about .about_row .image:before {
