@@ -1,6 +1,11 @@
-import { useRef } from "react";
+// Swiper
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
+
 //  librarry
-import CountUp from "react-countup";
 import resume from "/CV.pdf";
 // Images
 import Design1 from "/assests/3.png";
@@ -15,97 +20,84 @@ import Services6 from "/assests/service_icon/005-line-chart.svg";
 import Logo from "/assests/default-removebg-preview.png";
 import Profile from "/assests/profile.png";
 import "./Home.css";
+import { isValidArray } from '../utils/global-functions';
+import { cn } from '../lib/utils';
+const skills: {
+  src: string;
+  alt: string,
+  class?: string
+}[] = [
+    { src: "./skills/html.svg", alt: "html" },
+    { src: "./skills/css.svg", alt: "css" },
+    { src: "./skills/tailwind.svg", alt: "tailwind" },
+    { src: "./skills/bootstrap.png", alt: "bootstrap" },
+    { src: "./skills/js.svg", alt: "JavaScript" },
+    { src: "./skills/react.svg", alt: "React" },
+    { src: "./skills/vite.svg", alt: "Vite" },
+    { src: "./skills/nextjs.svg", alt: "Next.js" },
+    { src: "./skills/angular.svg", alt: "Angular" },
+    { src: "./skills/typescript.svg", alt: "TypeScript" },
+    { src: "./skills/nest.svg", alt: "nest" },
+    { src: "./skills/shopify.svg", alt: "Shopify" },
+    { src: "./skills/swiper.svg", alt: "Swiper" },
+    { src: "./skills/supabase.svg", alt: "supabase" },
+  ]
+
 
 const Home = () => {
-  const navRef = useRef<HTMLDivElement | null>(null);
-  const HandleOnClick = () => {
-    if (navRef && navRef.current) {
-      navRef.current.classList.toggle("active");
-    }
-  };
-
   return (
     <>
       <div className="main_container">
-        <div className="navbar">
-          <div className="hamburger hamburger1" onClick={HandleOnClick}>
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </div>
-          <div className="navbar_items navbar_items1 ">
-            <nav>
-              <ul className="navbar_list navbar_list1">
-                <li className="nav_list">
-                  <a href="#Home_page" className="nav_link">
-                    Home
-                  </a>
-                </li>
-                <li className="nav_list">
-                  <a href="#portfolio" className="nav_link">
-                    Porfolio
-                  </a>
-                </li>
-                <li className="nav_list">
-                  <a href="#about" className="nav_link">
-                    About
-                  </a>
-                </li>
-                <li className="nav_list">
-                  <a href="#services" className="nav_link">
-                    Services
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className="logo">
-            <img src={Logo} alt="" />
-          </div>
-          <div className=" navbar_items2 navbar_items ">
-            <nav>
-              <ul className="navbar_list navbar_list2">
-                <li className="nav_list">
-                  <a href="#skills" className="nav_link">
-                    Skills
-                  </a>
-                </li>
-                <li className="nav_list">
-                  <a href="#socials" className="nav_link">
-                    Socials
-                  </a>
-                </li>
-                <li className="nav_list">
-                  <a href="#client" className="nav_link">
-                    Happy Client
-                  </a>
-                </li>
-                <li className="nav_list">
-                  <a href="#contact" className="nav_link">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </nav>
+        <div className="about">
+          <div className="about_row">
+            <div
+              className="image"
+            >
+              <img src={Profile} alt="" />
+            </div>
+            <div
+              className="content"
+            >
+              <h1>We can make it together</h1>
+              <p>
+                I am a passionate <span>Full Stack Developer</span> with hands-on experience working in diverse companies, where I have contributed to building and scaling web applications from front-end to back-end. I hold a Bachelor’s degree in Software Engineering, which has provided me with a solid foundation in software development and problem-solving. Over the years, I have mastered modern technologies, frameworks, and tools to deliver high-quality, efficient, and user-friendly solutions.
+              </p>
+              <p>
+                I am always eager to take on new challenges, collaborate with teams, and contribute to impactful projects. If you’re looking for someone reliable, skilled, and dedicated to driving success through technology, <strong>let’s connect—I am ready to get started!</strong>
+              </p>
+
+              <div className="download_button flex gap-2">
+                <a href={'#tel:03363017225'}>
+                  <button>Call Now</button>
+                </a>
+                <a href={resume} download="CV">
+                  <button>Download your CV</button>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div className="main_container">
-        <div className="home_page" id="Home_page">
-          <div
-            className="content"
-            data-aos="zoom-in-up"
-            data-aos-easing="linear"
-            data-aos-duration="1500"
-          >
-            <h1>Mtech</h1>
-            <p>
-              I’m Muhammad Maaz Naveed A Website Developer and Designer Based In
-              Pakistan.
-            </p>
-          </div>
-        </div>
+        <Swiper
+          slidesPerView="auto"
+          spaceBetween={40}
+          freeMode
+          modules={[FreeMode]}
+          className="!ml-0 !pl-[2rem] !mt-[1rem]"
+        >
+          {isValidArray(skills) && skills.map((item) => (
+            <SwiperSlide key={item?.alt} className={cn("max-w-[50px]", item?.class)}>
+              <img
+                className="w-full h-full object-contain"
+                src={item?.src}
+                alt={item?.alt}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
+
       <div className="heading" id="portfolio">
         <h1
         // data-aos="fade-right"
@@ -231,44 +223,7 @@ const Home = () => {
           About Me
         </h1>
       </div>
-      <div className="main_container">
-        <div className="about">
-          <div className="about_row">
-            <div
-              className="image"
-              // data-aos="fade-down-right"
-              // data-aos-easing="linear"
-              // data-aos-duration="1500"
-            >
-              <img src={Profile} alt="" />
-            </div>
-            <div
-              className="content"
-              // data-aos="fade-down-left"
-              // data-aos-easing="linear"
-              // data-aos-duration="1500"
-            >
-              <h1>We can make it together</h1>
-              <p>
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there
-                <span>live the blind</span>
-                texts.
-              </p>
-              <p>
-                A small river named Duden flows by their place and supplies it
-                with the necessary regelialia. It is a paradisematic country, in
-                which roasted parts of sentences fly into your mouth.
-              </p>
-              <div className="download_button">
-                <a href={resume} download="CV">
-                  <button>Download your CV</button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div className="heading" id="services">
         <h1
         // data-aos="fade-right"
@@ -359,111 +314,6 @@ const Home = () => {
         >
           My Skills
         </h1>
-      </div>
-      <div className="main_container">
-        <div className="Skills">
-          <div className="Skills_row">
-            <div className="item">
-              <CountUp
-                className="skill_rating"
-                start={0}
-                end={90}
-                duration={2}
-                delay={0}
-              />
-              <sup>%</sup>
-
-              <h1 className="skills_heading_item">HTML</h1>
-            </div>
-            <div className="item">
-              <CountUp
-                className="skill_rating"
-                start={0}
-                end={80}
-                duration={2}
-                delay={0}
-              />
-              <sup>%</sup>
-
-              <h1 className="skills_heading_item">CSS</h1>
-            </div>
-            <div className="item">
-              <CountUp
-                className="skill_rating"
-                start={0}
-                end={60}
-                duration={2}
-                delay={0}
-              />
-              <sup>%</sup>
-
-              <h1 className="skills_heading_item">JavaScript</h1>
-            </div>
-            <div className="item">
-              <CountUp
-                className="skill_rating"
-                start={0}
-                end={60}
-                duration={2}
-                delay={0}
-              />
-              <sup>%</sup>
-
-              <h1 className="skills_heading_item">React JS</h1>
-            </div>
-            <div className="item">
-              <CountUp
-                className="skill_rating"
-                start={0}
-                end={50}
-                duration={2}
-                delay={0}
-              />
-              <sup>%</sup>
-
-              <h1 className="skills_heading_item">Node JS</h1>
-            </div>
-            <div className="item">
-              <CountUp
-                className="skill_rating"
-                start={0}
-                end={90}
-                duration={2}
-                delay={0}
-              />
-              {/* )} */}
-              <sup>%</sup>
-
-              <h1 className="skills_heading_item">Express JS</h1>
-            </div>
-            <div className="item">
-              <CountUp
-                className="skill_rating"
-                start={0}
-                end={80}
-                duration={2}
-                delay={0}
-              />
-              {/* )} */}
-              <sup>%</sup>
-
-              <h1 className="skills_heading_item">Mongo DB</h1>
-            </div>
-            <div className="item">
-              <CountUp
-                className="skill_rating"
-                start={0}
-                end={90}
-                duration={2}
-                delay={0}
-              />
-              {/* )} */}
-              <sup>%</sup>
-
-              <h1 className="skills_heading_item">Wordpress</h1>
-            </div>
-          </div>
-        </div>
       </div>
       <div className="heading" id="client">
         <h1
