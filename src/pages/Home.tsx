@@ -304,15 +304,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="heading" id="skills">
-        <h1
-        // data-aos="fade-right"
-        // data-aos-easing="linear"
-        // data-aos-duration="1500"
-        >
-          My Skills
-        </h1>
-      </div>
       <div className="heading" id="client">
         <h1
         // data-aos="fade-right"
