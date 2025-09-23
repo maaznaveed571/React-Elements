@@ -2,36 +2,47 @@ import { useEffect, useState } from "react";
 import { generateListing } from "../components/player/api";
 
 const Player = () => {
-  const [data, setData] = useState<{
-    name: string,
-    image: string,
-    avatorId: string
-    voiceId: string;
-    llms: string
-  }[]>([])
+  const [data, setData] = useState<
+    {
+      name: string;
+      image: string;
+      avatorId: string;
+      voiceId: string;
+      llms: string;
+    }[]
+  >([]);
   const [selected, setSelected] = useState<{
-    name: string,
-    image: string,
-    avatorId: string
+    name: string;
+    image: string;
+    avatorId: string;
     voiceId: string;
-    llms: string
-  } | null>(null)
+    llms: string;
+  } | null>(null);
   const getLsiting = async () => {
-    const listing = await generateListing()
-    const filtered = listing.filter(item =>
-      Object.values(item).every(val => val !== "" && val !== null && val !== undefined)
+    const listing = await generateListing();
+    const filtered = listing.filter((item) =>
+      Object.values(item).every(
+        (val) => val !== "" && val !== null && val !== undefined,
+      ),
     );
-    setData(filtered)
-  }
+    setData(filtered);
+  };
   useEffect(() => {
-    getLsiting()
-  }, [])
+    getLsiting();
+  }, []);
   return (
     <div className="flex gap-3">
       <div className="flex flex-col gap-3 p-2">
-        {isValidArray(data) && data?.length > 0 ? data?.map((item,index) => (
-          <ChatItem key={index +1} onClick={() => setSelected(item)} imageUrl={item?.image} title={item?.name} />
-        )) : null}
+        {isValidArray(data) && data?.length > 0
+          ? data?.map((item, index) => (
+              <ChatItem
+                key={index + 1}
+                onClick={() => setSelected(item)}
+                imageUrl={item?.image}
+                title={item?.name}
+              />
+            ))
+          : null}
       </div>
       <InitialLoadingPlayer selected={selected} />
     </div>
@@ -40,7 +51,6 @@ const Player = () => {
 
 export default Player;
 
-
 import React from "react";
 import { isValidArray } from "../utils/global-functions";
 import InitialLoadingPlayer from "../components/player/InitialLoadingPlayer";
@@ -48,12 +58,16 @@ import InitialLoadingPlayer from "../components/player/InitialLoadingPlayer";
 interface ChatItemProps {
   imageUrl: string;
   title: string;
-  onClick: () => void
+  onClick: () => void;
 }
 
 const ChatItem: React.FC<ChatItemProps> = ({ imageUrl, title, onClick }) => {
   return (
-    <button type="button" onClick={onClick} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 cursor-pointer">
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 cursor-pointer"
+    >
       <img
         src={imageUrl}
         alt={title}
@@ -63,4 +77,3 @@ const ChatItem: React.FC<ChatItemProps> = ({ imageUrl, title, onClick }) => {
     </button>
   );
 };
-
