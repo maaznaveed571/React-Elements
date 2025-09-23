@@ -122,4 +122,25 @@
   button {
     @apply !px-4 !py-2;
   }
+
+  @layer utilities {
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 20px #ff1a1a;
+      }
+
+      50% {
+        box-shadow: 0 0 20px #ff6666, 0 0 30px #ff3333, 0 0 40px #ff1a1a;
+      }
+
+      100% {
+        box-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 20px #ff1a1a;
+      }
+    }
+
+    .animate-glow {
+      animation: glow 1.5s infinite alternate;
+    }
+  }
+
 }
