@@ -31,8 +31,8 @@ const Player = () => {
     getLsiting();
   }, []);
   return (
-    <div className="flex gap-3">
-      <div className="flex flex-col gap-3 p-2">
+    <div className="flex gap-3 !p-[1rem]">
+      <div className="flex flex-col gap-3 p-2 min-w-[300px]">
         {isValidArray(data) && data?.length > 0
           ? data?.map((item, index) => (
               <ChatItem
