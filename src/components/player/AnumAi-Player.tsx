@@ -29,9 +29,7 @@ const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
     const setup = async () => {
       stopVideoStreaming();
 
-      const client = createClient(sessionToken, {
-        disableInputAudio: true,
-      });
+      const client = createClient(sessionToken);
       anamClientRef.current = client;
 
       try {
