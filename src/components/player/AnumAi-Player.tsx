@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AnamEvent, createClient, type AnamClient } from "@anam-ai/js-sdk";
+import { AnamEvent, createClient, MessageRole, type AnamClient } from "@anam-ai/js-sdk";
 import { Loader } from "lucide-react";
 
 const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
@@ -7,6 +7,7 @@ const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [transcript, setTranscript] = useState<string>("");
+  const [perosonaTranscript, setPerosonaTranscript] = useState<string>("");
   const [isListening, setIsListening] = useState(false);
 
   // Add this at the top of your component
@@ -29,7 +30,7 @@ const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
     }
 
     // Add a longer delay to ensure server-side cleanup
-    await new Promise(res => setTimeout(res, 2000));
+    await new Promise((res) => setTimeout(res, 2000));
   };
   useEffect(() => {
     const setup = async () => {
@@ -73,7 +74,11 @@ const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
       anamClientRef.current.addListener(
         AnamEvent.MESSAGE_STREAM_EVENT_RECEIVED,
         (event) => {
-          setTranscript(event.content);
+          if (event.role === MessageRole.PERSONA) {
+            setPerosonaTranscript(event.content);
+          } else if (event.role === MessageRole.USER) {
+            setTranscript(event.content);
+          }
         },
       );
       anamClientRef.current.addListener(
@@ -115,7 +120,10 @@ const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
         🎤 {isListening ? "Listening..." : "Start"}
       </button>
 
+      <p>User Transcript</p>
       {transcript !== "" && <p>{transcript}</p>}
+      <p>Persona Transcript</p>
+      {perosonaTranscript !== "" && <p>{perosonaTranscript}</p>}
     </div>
   );
 };
