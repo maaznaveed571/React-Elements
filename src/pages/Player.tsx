@@ -32,7 +32,7 @@ const Player = () => {
   }, []);
   return (
     <div className="flex flex-col sm:flex-row gap-3 !p-[1rem]">
-      <div className="flex flex-col gap-3 p-2 min-w-[300px]">
+      <div className="flex flex-row overflow-x-auto sm:flex-col gap-3 p-2 min-w-[300px]">
         {isValidArray(data) && data?.length > 0
           ? data?.map((item, index) => (
               <ChatItem
@@ -66,7 +66,7 @@ const ChatItem: React.FC<ChatItemProps> = ({ imageUrl, title, onClick }) => {
     <button
       type="button"
       onClick={onClick}
-      className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 cursor-pointer"
+      className="flex flex-col sm:flex-row items-center gap-3 p-3 rounded-xl hover:bg-gray-100 cursor-pointer"
     >
       <img
         src={imageUrl}

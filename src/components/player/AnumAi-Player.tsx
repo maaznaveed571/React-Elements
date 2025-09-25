@@ -9,47 +9,63 @@ const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
   const [transcript, setTranscript] = useState<string>("");
   const [isListening, setIsListening] = useState(false);
 
-  const stopVideoStreaming = async () => {
+  // Add this at the top of your component
+  const cleanupAllSessions = async () => {
+    // Force cleanup any existing sessions
     if (anamClientRef.current) {
       try {
         await anamClientRef.current.stopStreaming();
-        console.log("Stopped stream");
       } catch (err) {
-        console.error("Error stopping stream:", err);
-      }
-
-      anamClientRef.current = null;
-      if (videoRef?.current) {
-        videoRef.current.srcObject = null;
-        videoRef.current.load();
+        console.error("Error in cleanup:", err);
+      } finally {
+        anamClientRef.current = null;
       }
     }
+
+    // Clear video element
+    if (videoRef?.current) {
+      videoRef.current.srcObject = null;
+      videoRef.current.load();
+    }
+
+    // Add a longer delay to ensure server-side cleanup
+    await new Promise(res => setTimeout(res, 2000));
   };
   useEffect(() => {
     const setup = async () => {
-      stopVideoStreaming();
+      // Always cleanup first
+      await cleanupAllSessions();
 
       const client = createClient(sessionToken);
       anamClientRef.current = client;
+
       client.addListener(AnamEvent.SESSION_READY, () => {
         setLoading(false);
       });
-      // Test if the persona can respond
+
       try {
         await client.streamToVideoElement(`video-element-${sessionToken}`);
-        await client.sendUserMessage("Hello, can you hear me?");
       } catch (err) {
         console.error("Error starting stream:", err);
+        // Cleanup on error
+        await cleanupAllSessions();
       }
     };
 
     setup();
 
     return () => {
-      // Cleanup on unmount or sessionToken change
-      if (anamClientRef?.current) {
-        anamClientRef?.current.stopStreaming();
-      }
+      (async () => {
+        if (anamClientRef.current) {
+          try {
+            await anamClientRef.current.stopStreaming();
+          } catch (e) {
+            console.error("Cleanup stopStreaming failed:", e);
+          } finally {
+            anamClientRef.current = null;
+          }
+        }
+      })();
     };
   }, [sessionToken]);
   useEffect(() => {
@@ -57,14 +73,12 @@ const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
       anamClientRef.current.addListener(
         AnamEvent.MESSAGE_STREAM_EVENT_RECEIVED,
         (event) => {
-          console.log(event, "event");
-          setTranscript((prev) => `${prev ? prev : ""} ${event.content}`);
+          setTranscript(event.content);
         },
       );
       anamClientRef.current.addListener(
         AnamEvent.INPUT_AUDIO_STREAM_STARTED,
         (event) => {
-          console.log(event, "event");
           if (event) {
             setIsListening(true);
           } else {
