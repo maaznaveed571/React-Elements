@@ -29,15 +29,15 @@ const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
     const setup = async () => {
       stopVideoStreaming();
 
-      const client = createClient(sessionToken, {
-        disableInputAudio: false,
-      });
+      const client = createClient(sessionToken);
       anamClientRef.current = client;
       client.addListener(AnamEvent.SESSION_READY, () => {
         setLoading(false);
       });
+      // Test if the persona can respond
       try {
         await client.streamToVideoElement(`video-element-${sessionToken}`);
+        await client.sendUserMessage("Hello, can you hear me?");
       } catch (err) {
         console.error("Error starting stream:", err);
       }
