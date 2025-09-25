@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { AnamEvent, createClient, MessageRole, type AnamClient } from "@anam-ai/js-sdk";
+import {
+  AnamEvent,
+  createClient,
+  MessageRole,
+  type AnamClient,
+} from "@anam-ai/js-sdk";
 import { Loader } from "lucide-react";
 
 const AnumAI = ({ sessionToken }: { sessionToken: string }) => {
